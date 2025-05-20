@@ -33,7 +33,7 @@ export default function HomeScreen() {
 
   const fetchStats = async () => {
     try {
-      const response = await fetch('http://192.168.7.6:3000/stats');
+      const response = await fetch('http://192.168.7.13:3000/stats');
       const data = await response.json();
       setStats(data);
     } catch (error) {
@@ -55,6 +55,7 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <Button title="Ajouter un enseignant" onPress={() => navigation.navigate('Add')} />
       
+
       {/* Liste des enseignants */}
       <FlatList
         data={enseignants}
@@ -65,7 +66,11 @@ export default function HomeScreen() {
             onEdit={() => navigation.navigate('Edit', { enseignant: item })}
             onDelete={() => deleteEnseignant(item.matricule).then(fetchData)}
           />
+          
+          
         )}
+        
+        
         ListFooterComponent={
           loadingStats ? (
             <ActivityIndicator size="large" color="#0000ff" />
@@ -74,6 +79,8 @@ export default function HomeScreen() {
           )
         }
       />
+      <Button title="Voir l'histogramme" onPress={() => navigation.navigate('StatsChart')} />
+      <Button title="Voir le camembert" onPress={() => navigation.navigate('StatsPieChart')} />
     </View>
   );
 }

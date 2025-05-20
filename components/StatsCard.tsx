@@ -13,16 +13,17 @@ export default function StatsCard({ total, min, max }: StatsCardProps) {
       <Text style={styles.title}>Statistiques</Text>
       <View style={styles.row}>
         <Text style={styles.label}>Total :</Text>
-        <Text style={styles.value}>{total}</Text>
+        <Text style={styles.value}>{total} Ar </Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.label}>Min :</Text>
-        <Text style={styles.value}>{min}</Text>
+        <Text style={styles.value}>{min} Ar </Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.label}>Max :</Text>
-        <Text style={styles.value}>{max}</Text>
+        <Text style={styles.value}>{max} Ar </Text>
       </View>
+      
     </View>
   );
 }

@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
+import { api } from '../services/api'; // ← assure-toi que le chemin est correct
 
 export default function Stats() {
   const [stats, setStats] = useState<{ total: number; min: number; max: number } | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://192.168.7.6:3000/stats')
-      .then((res) => res.json())
-      .then((data) => {
-        setStats(data);
-        setLoading(false);
-      })
-      .catch((err) => {
+    const fetchStats = async () => {
+      try {
+        const res = await api.get('/stats');
+        setStats(res.data);
+      } catch (err) {
         console.error('Erreur lors de la récupération des stats:', err);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchStats();
   }, []);
 
   if (loading) return <ActivityIndicator style={{ marginTop: 50 }} />;
